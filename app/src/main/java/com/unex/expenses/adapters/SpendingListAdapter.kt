@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.unex.expenses.R
 import com.unex.expenses.SpendingList
-import com.unex.expenses.models.SpendingEntity
+import com.unex.expenses.models.Helper
+import com.unex.expenses.models.Spending
 import kotlinx.android.synthetic.main.item_spending.view.*
 
 class SpendingListAdapter : RecyclerView.Adapter<SpendingListAdapter.ViewHolder>() {
@@ -14,9 +15,14 @@ class SpendingListAdapter : RecyclerView.Adapter<SpendingListAdapter.ViewHolder>
     private var spendings: SpendingList = listOf()
 
     class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(spending: SpendingEntity) {
+        fun bind(spending: Spending) {
             view.amount.text = spending.getAmount().toString()
-            view.date.text = spending.getDate().toString()
+            view.date.text = Helper.getDateString(spending.getDate())
+            view.tags.text = spending.getTags().joinToString(" - ")
+            spending.getDescription()?.let {
+                view.description.text = it
+                view.description.visibility = View.VISIBLE
+            }
         }
     }
 

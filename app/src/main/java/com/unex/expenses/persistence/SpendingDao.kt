@@ -6,7 +6,7 @@ import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import com.unex.expenses.SpendingList
-import com.unex.expenses.models.SpendingEntity
+import com.unex.expenses.models.Spending
 
 @Dao
 interface SpendingDao {
@@ -15,8 +15,8 @@ interface SpendingDao {
     fun getAll(): LiveData<SpendingList>
 
     @Insert()
-    fun insert(spending: SpendingEntity)
+    fun insert(spending: Spending)
 
     @Delete()
-    fun delete(spending: SpendingEntity)
+    fun delete(spending: Spending)
 }

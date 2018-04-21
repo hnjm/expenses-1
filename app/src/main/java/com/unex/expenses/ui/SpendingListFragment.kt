@@ -12,9 +12,10 @@ import com.unex.expenses.R
 import com.unex.expenses.SpendingList
 import com.unex.expenses.adapters.SpendingListAdapter
 import com.unex.expenses.vms.SpendingListViewModel
+import kotlinx.android.synthetic.main.content_spendings.view.*
 import kotlinx.android.synthetic.main.fragment_spendings.view.*
 
-class SpendingsFragment : Fragment() {
+class SpendingListFragment : Fragment() {
 
     private val spendingListAdapter: SpendingListAdapter = SpendingListAdapter()
     private lateinit var model: SpendingListViewModel
@@ -34,15 +35,20 @@ class SpendingsFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = spendingListAdapter
         }
+        view.addSpendingButton.setOnClickListener {
+            fragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.container, NewSpendingFragment())
+                    ?.addToBackStack(null)
+                    ?.commit()
+        }
         return view
     }
 
     override fun onStart() {
         super.onStart()
         model.getSpendings().observe(this, Observer<SpendingList> { storedSpendings ->
-            storedSpendings?.run {
-                spendingListAdapter.setSpendings(storedSpendings)
-            }
+            storedSpendings?.let { spendingListAdapter.setSpendings(it) }
         })
     }
 }

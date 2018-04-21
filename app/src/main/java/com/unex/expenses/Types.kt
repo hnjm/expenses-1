@@ -1,5 +1,5 @@
 package com.unex.expenses
 
-import com.unex.expenses.models.SpendingEntity
+import com.unex.expenses.models.Spending
 
-typealias SpendingList = List<SpendingEntity>;
+typealias SpendingList = List<Spending>;

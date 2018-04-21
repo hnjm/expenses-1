@@ -2,6 +2,13 @@
 <resources>
     <string name="app_name">Expenses</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_spendings">Spendings</string>
+    <string name="title_new_spending">New Spending</string>
+
+    <string name="hint_amount">Amount</string>
+    <string name="hint_date">Date</string>
+    <string name="hint_tags">Tags</string>
+    <string name="hint_description">Description</string>
+
+    <string name="button_add_spending">Add Spending</string>
 </resources>
