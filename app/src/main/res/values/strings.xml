@@ -5,10 +5,24 @@
     <string name="title_spendings">Spendings</string>
     <string name="title_new_spending">New Spending</string>
 
-    <string name="hint_amount">Amount</string>
-    <string name="hint_date">Date</string>
-    <string name="hint_tags">Tags</string>
-    <string name="hint_description">Description</string>
+    <string name="hint_amount">Amount spent</string>
+    <string name="hint_date">Pick the date</string>
+    <string name="hint_tags">Pick the tags</string>
+    <string name="hint_description">Description (optional)</string>
+
+    <string name="dialog_tags_title">Tags</string>
+    <string name="dialog_tags_ok">OK</string>
 
     <string name="button_add_spending">Add Spending</string>
+    <string name="logo">Logo</string>
+
+    <string-array name="default_tags">
+        <item>Food</item>
+        <item>Work</item>
+        <item>Party</item>
+        <item>Alcohol</item>
+        <item>Gift</item>
+        <item>Family</item>
+        <item>Relationship</item>
+    </string-array>
 </resources>
