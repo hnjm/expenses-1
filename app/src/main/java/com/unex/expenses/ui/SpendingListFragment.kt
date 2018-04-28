@@ -55,6 +55,7 @@ class SpendingListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        activity?.setTitle(R.string.title_spendings)
         EventBus.getDefault().register(this)
         model.getSpendings().observe(this, Observer<SpendingList> { storedSpendings ->
             storedSpendings?.let { spendingListAdapter.setSpendings(it) }

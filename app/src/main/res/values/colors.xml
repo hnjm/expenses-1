@@ -5,4 +5,5 @@
     <color name="accent">#FDCA30</color>
     <color name="card">#FFFFFF</color>
     <color name="background">#EEEEEE</color>
+    <color name="light">#FFFFFF</color>
 </resources>

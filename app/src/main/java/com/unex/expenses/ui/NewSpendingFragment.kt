@@ -68,6 +68,7 @@ class NewSpendingFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
+        activity?.setTitle(R.string.title_new_spending)
     }
 
     override fun onStop() {
