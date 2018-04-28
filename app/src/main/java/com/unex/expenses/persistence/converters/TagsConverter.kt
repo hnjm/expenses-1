@@ -2,14 +2,14 @@ package com.unex.expenses.persistence
 
 import android.arch.persistence.room.TypeConverter
 
-class ListConverter {
+class TagsConverter {
     @TypeConverter
-    fun to(tags: String?): List<String>? {
-        return tags?.split("-")
+    fun to(tags: String?): Set<String>? {
+        return HashSet<String>(tags?.split("-"))
     }
 
     @TypeConverter
-    fun from(tags: List<String>?): String? {
+    fun from(tags: Set<String>?): String? {
         return tags?.joinToString("-")
     }
 }
