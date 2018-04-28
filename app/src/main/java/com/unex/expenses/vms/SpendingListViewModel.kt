@@ -8,11 +8,30 @@ import com.unex.expenses.repositories.SpendingRepository
 
 class SpendingListViewModel(application: Application) : AndroidViewModel(application) {
 
+    private var storedSpendings: SpendingList = emptyList()
+    private var selectedTags: Set<String> = emptySet()
+
     private val spendingsObs: MediatorLiveData<SpendingList> = MediatorLiveData()
 
+    private fun getFilteredSpendings() = storedSpendings.filter {
+        selectedTags.isEmpty() || it.getTags().intersect(selectedTags).isNotEmpty()
+    }
+
     init {
-        spendingsObs.addSource(SpendingRepository.get().getSpendings(), spendingsObs::setValue)
+        spendingsObs.addSource(SpendingRepository.get().getSpendings(), {
+            it?.let {
+                storedSpendings = it
+                val spendings = getFilteredSpendings()
+                spendingsObs.postValue(spendings)
+            }
+        })
     }
 
     fun getSpendings() = spendingsObs
+
+    fun setSelectedTags(tags: Set<String>) {
+        selectedTags = tags
+        val spendings = getFilteredSpendings()
+        spendingsObs.postValue(spendings)
+    }
 }

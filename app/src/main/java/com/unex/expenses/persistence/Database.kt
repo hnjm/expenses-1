@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room
 import android.content.Context
 
 object Database {
+
     private lateinit var database: AppDatabase
 
     fun setUp(context: Context) {

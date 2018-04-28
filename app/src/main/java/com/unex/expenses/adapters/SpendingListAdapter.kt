@@ -14,11 +14,11 @@ class SpendingListAdapter : RecyclerView.Adapter<SpendingListAdapter.ViewHolder>
 
     private var spendings: SpendingList = listOf()
 
-    class ViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(spending: Spending) {
             view.amount.text = spending.getAmount().toString()
             view.date.text = Helper.getDateString(spending.getDate())
-            view.tags.text = spending.getTags().joinToString(" - ")
+            view.tags.text = spending.getTags().joinToString(", ")
             spending.getDescription()?.let {
                 view.description.text = it
                 view.description.visibility = View.VISIBLE

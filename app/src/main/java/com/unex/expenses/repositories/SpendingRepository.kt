@@ -2,6 +2,7 @@ package com.unex.expenses.repositories
 
 import android.arch.lifecycle.MediatorLiveData
 import com.unex.expenses.SpendingList
+import com.unex.expenses.models.Helper
 import com.unex.expenses.models.Spending
 import com.unex.expenses.persistence.Database
 
@@ -10,7 +11,10 @@ class SpendingRepository() {
     private val spendingsObs: MediatorLiveData<SpendingList> = MediatorLiveData()
 
     init {
-        spendingsObs.addSource(Database.get().spendingDao().getAll(), spendingsObs::postValue)
+        spendingsObs.addSource(
+                Database.get().spendingDao().getFiltered(Helper.getOneMonthAgoTimestamp()),
+                spendingsObs::postValue
+        )
     }
 
     fun getSpendings() = spendingsObs

@@ -8,7 +8,7 @@ import java.util.*
 class Spending(
         private val amount: Double,
         private val date: Date,
-        private val tags: List<String>,
+        private val tags: Set<String>,
         private val description: String?
 ) {
     @PrimaryKey(autoGenerate = true)

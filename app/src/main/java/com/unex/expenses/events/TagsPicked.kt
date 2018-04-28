@@ -1,4 +1,3 @@
 package com.unex.expenses.events
 
-class TagsPicked {
-}
+class TagsPicked(val tags: Set<String>)

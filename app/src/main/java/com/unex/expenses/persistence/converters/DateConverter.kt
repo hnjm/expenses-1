@@ -1,4 +1,4 @@
-package com.unex.expenses.persistence
+package com.unex.expenses.persistence.converters
 
 import android.arch.persistence.room.TypeConverter
 import java.util.*
