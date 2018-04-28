@@ -8,7 +8,7 @@
         android:id="@+id/logo"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:contentDescription="@string/logo"
+        android:contentDescription="@string/description_logo"
         android:src="@mipmap/icon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

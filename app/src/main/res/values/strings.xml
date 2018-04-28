@@ -14,7 +14,10 @@
     <string name="dialog_tags_ok">OK</string>
 
     <string name="button_add_spending">Add Spending</string>
-    <string name="logo">Logo</string>
+
+    <string name="menu_settings">Settings</string>
+
+    <string name="description_logo">Logo</string>
 
     <string-array name="default_tags">
         <item>Food</item>
