@@ -4,7 +4,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-object Helper {
+object DateHelper {
 
     fun getCurrentDay(): Int {
         val calendar = Calendar.getInstance()
@@ -21,14 +21,24 @@ object Helper {
         return calendar.get(Calendar.YEAR)
     }
 
-    fun getOneWeekAgoTimestamp(date: Date = Date()): Long {
+    fun startOfDayTimestamp(date: Date = Date()): Long {
+        val calendar = GregorianCalendar()
+        calendar.time = date
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        return calendar.timeInMillis
+    }
+
+    fun oneWeekAgoTimestamp(date: Date = Date()): Long {
         val calendar = GregorianCalendar()
         calendar.time = date
         calendar.add(Calendar.DAY_OF_YEAR, -7)
         return calendar.timeInMillis
     }
 
-    fun getOneMonthAgoTimestamp(date: Date = Date()): Long {
+    fun oneMonthAgoTimestamp(date: Date = Date()): Long {
         val calendar = GregorianCalendar()
         calendar.time = date
         calendar.add(Calendar.DAY_OF_YEAR, -30)
@@ -50,18 +60,4 @@ object Helper {
     fun getDateString(date: Date): String = SimpleDateFormat
             .getDateInstance(DateFormat.LONG)
             .format(date)
-
-    fun createSpending(
-            amount: String,
-            date: Date,
-            tags: String,
-            description: String
-    ): Spending {
-        return Spending(
-                amount.toDouble(),
-                date,
-                tags.split(", ").toSet(),
-                if (description.isEmpty()) null else description
-        )
-    }
 }

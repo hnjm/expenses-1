@@ -10,77 +10,69 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/amountLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/card"
-            android:padding="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/amountInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/hint_amount"
-                android:inputType="numberDecimal" />
-        </android.support.design.widget.TextInputLayout>
-
         <Button
             android:id="@+id/dateButton"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/card"
+            style="@style/FormCard"
             android:drawableEnd="@drawable/ic_chevron"
-            android:drawablePadding="8dp"
             android:drawableStart="@drawable/ic_calendar"
-            android:drawableTint="@color/accent"
-            android:gravity="start|center_vertical"
-            android:padding="16dp"
-            android:text="@string/hint_date"
             app:layout_constraintBottom_toTopOf="@id/tagsButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/amountLayout"
-            tools:targetApi="M" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/tagsButton"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/FormCard"
             android:layout_marginTop="16dp"
-            android:background="@color/card"
             android:drawableEnd="@drawable/ic_chevron"
-            android:drawablePadding="8dp"
             android:drawableStart="@drawable/ic_tags"
-            android:drawableTint="@color/accent"
-            android:gravity="start|center_vertical"
-            android:padding="16dp"
             android:text="@string/hint_tags"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dateButton"
-            tools:targetApi="M" />
+            app:layout_constraintTop_toBottomOf="@id/dateButton" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/descriptionLayout"
+        <LinearLayout
+            style="@style/FormCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/card"
-            android:gravity="center"
-            android:padding="8dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@id/tagsButton">
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/descriptionInput"
+            <TextView
+                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_description"
-                android:inputType="textCapSentences" />
-        </android.support.design.widget.TextInputLayout>
+                android:text="@string/label_details"
+                android:textColor="@color/accent" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/amountLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/amountInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_amount"
+                    android:inputType="numberDecimal"
+                    tools:text="395" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/descriptionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/descriptionInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_description"
+                    android:inputType="textCapSentences"
+                    tools:text="Some description" />
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

@@ -6,7 +6,7 @@ import android.arch.lifecycle.MediatorLiveData
 import com.unex.expenses.SpendingList
 import com.unex.expenses.repositories.SpendingRepository
 
-class SpendingListViewModel(application: Application) : AndroidViewModel(application) {
+class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
 
     private var storedSpendings: SpendingList = emptyList()
     private var selectedTags: Set<String> = emptySet()
@@ -18,7 +18,7 @@ class SpendingListViewModel(application: Application) : AndroidViewModel(applica
     }
 
     init {
-        spendingsObs.addSource(SpendingRepository.get().getSpendings(), {
+        spendingsObs.addSource(SpendingRepository.getSpendings(), {
             it?.let {
                 storedSpendings = it
                 val spendings = getFilteredSpendings()

@@ -6,7 +6,7 @@ import java.util.*
 
 @Entity(tableName = "spendings")
 class Spending(
-        private val amount: Double,
+        private val amount: Int,
         private val date: Date,
         private val tags: Set<String>,
         private val description: String?

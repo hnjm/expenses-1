@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.unex.expenses.R
 import com.unex.expenses.SpendingList
-import com.unex.expenses.adapters.SpendingListAdapter
+import com.unex.expenses.adapters.SpendingAdapter
 import com.unex.expenses.dialogs.TagsDialog
 import com.unex.expenses.events.TagsPicked
 import com.unex.expenses.vms.SpendingListViewModel
@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.Subscribe
 
 class SpendingListFragment : Fragment() {
 
-    private val spendingListAdapter: SpendingListAdapter = SpendingListAdapter()
+    private val spendingListAdapter = SpendingAdapter()
     private lateinit var model: SpendingListViewModel
 
     override fun onCreate(state: Bundle?) {
@@ -43,13 +43,6 @@ class SpendingListFragment : Fragment() {
         view.applyFiltersButton.setOnClickListener {
             tagsDialog.show(fragmentManager, tagsDialog.javaClass.name)
         }
-        view.addSpendingButton.setOnClickListener {
-            fragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.container, NewSpendingFragment())
-                    ?.addToBackStack(null)
-                    ?.commit()
-        }
         return view
     }
 
@@ -58,7 +51,7 @@ class SpendingListFragment : Fragment() {
         activity?.setTitle(R.string.title_spendings)
         EventBus.getDefault().register(this)
         model.getSpendings().observe(this, Observer<SpendingList> { storedSpendings ->
-            storedSpendings?.let { spendingListAdapter.setSpendings(it) }
+            storedSpendings?.let { spendingListAdapter.submitList(it) }
         })
     }
 

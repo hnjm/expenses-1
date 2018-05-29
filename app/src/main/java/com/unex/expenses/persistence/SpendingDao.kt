@@ -11,11 +11,8 @@ import com.unex.expenses.models.Spending
 @Dao
 interface SpendingDao {
 
-    @Query("SELECT * FROM spendings")
-    fun getAll(): LiveData<SpendingList>
-
-    @Query("SELECT * FROM spendings WHERE date > :limit")
-    fun getFiltered(limit: Long): LiveData<SpendingList>
+    @Query("SELECT * FROM spendings WHERE date >= :limit")
+    fun retrieve(limit: Long): LiveData<SpendingList>
 
     @Insert()
     fun insert(spending: Spending)
