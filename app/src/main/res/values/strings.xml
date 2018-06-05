@@ -25,6 +25,7 @@
     <string name="description_logo">Logo</string>
     <string name="label_details">Spending Details</string>
     <string name="button_spendings">Spendings</string>
+    <string name="label_spent_today">Spent today</string>
 
     <string-array name="default_tags">
         <item>Food</item>

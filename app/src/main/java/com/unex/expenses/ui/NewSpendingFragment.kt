@@ -1,24 +1,28 @@
 package com.unex.expenses.ui
 
 import android.app.DatePickerDialog
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.AsyncTask
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.unex.expenses.R
+import com.unex.expenses.TagSet
 import com.unex.expenses.dialogs.TagsDialog
 import com.unex.expenses.events.TagsPicked
 import com.unex.expenses.models.DateHelper
-import com.unex.expenses.models.SpendingHelper
+import com.unex.expenses.models.Spending
+import com.unex.expenses.models.Validations
 import com.unex.expenses.vms.NewSpendingViewModel
 import kotlinx.android.synthetic.main.content_new_spending.*
-import kotlinx.android.synthetic.main.content_new_spending.view.*
-import kotlinx.android.synthetic.main.fragment_new_spending.view.*
+import kotlinx.android.synthetic.main.fragment_new_spending.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
+import java.util.*
 
 class NewSpendingFragment : Fragment() {
 
@@ -29,41 +33,53 @@ class NewSpendingFragment : Fragment() {
         model = ViewModelProviders.of(this).get(NewSpendingViewModel::class.java)
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            state: Bundle?
-    ): View? {
-        val tagsDialog = TagsDialog()
-        val view = inflater.inflate(R.layout.fragment_new_spending, container, false)
-        view.dateButton.text = DateHelper.getDateString(model.date)
-        view.tagsButton.setOnClickListener {
-            tagsDialog.show(fragmentManager, tagsDialog.javaClass.name)
-        }
-        view.dateButton.setOnClickListener {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View =
+            inflater.inflate(R.layout.fragment_new_spending, container, false)
+
+    override fun onViewCreated(view: View, state: Bundle?) {
+        super.onViewCreated(view, state)
+        dateButton.text = DateHelper.getDateString(model.getDate())
+        dateButton.setOnClickListener {
+            val listener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                model.setDate(year, month, day)
+            }
             DatePickerDialog(
                     activity,
-                    DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                        model.date = DateHelper.createDate(year, month, day)
-                        view.dateButton.text = DateHelper.getDateString(model.date)
-                    },
+                    listener,
                     DateHelper.getCurrentYear(),
                     DateHelper.getCurrentMonth(),
                     DateHelper.getCurrentDay()
             ).show()
         }
-        view.createSpendingButton.setOnClickListener {
-            SpendingHelper.createSpending(
-                    view.amountInput.text.toString(),
-                    model.date,
-                    view.tagsButton.text.toString(),
-                    view.descriptionInput.text.toString()
-            ).let {
-                AsyncTask.execute { model.addSpending(it) }
+
+        model.dateData.observe(this, Observer<Date> { date ->
+            date?.let { dateButton.text = DateHelper.getDateString(it) }
+        })
+
+        model.tagsData.observe(this, Observer<TagSet> { tags ->
+            tags?.let { if (it.isNotEmpty()) tagsButton.text = it.joinToString(", ") }
+        })
+
+        val tagsDialog = TagsDialog()
+        tagsButton.setOnClickListener {
+            tagsDialog.show(fragmentManager, tagsDialog.javaClass.name)
+        }
+
+        createSpendingButton.setOnClickListener {
+            try {
+                val amount = Validations.validateAmount(amountInput.text.toString()).toInt()
+                val description = descriptionInput.text.toString().let {
+                    if (it.isEmpty()) null else it
+                }
+                val spending = Spending(amount, model.getDate(), model.getTags(), description)
+                AsyncTask.execute { model.addSpending(spending) }
                 fragmentManager?.popBackStack()
+            } catch (exc: NumberFormatException) {
+                Snackbar.make(view, "The amount entered is not a number", Snackbar.LENGTH_SHORT).show();
+            } catch (exc: Exception) {
+                Snackbar.make(view, "Please complete the amount", Snackbar.LENGTH_SHORT).show();
             }
         }
-        return view
     }
 
     override fun onStart() {
@@ -79,6 +95,6 @@ class NewSpendingFragment : Fragment() {
 
     @Subscribe
     fun onEvent(event: TagsPicked) {
-        tagsButton.text = event.tags.joinToString(", ")
+        model.setTags(event.tags)
     }
 }

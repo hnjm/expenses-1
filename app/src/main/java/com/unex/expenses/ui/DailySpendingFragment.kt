@@ -11,8 +11,7 @@ import com.unex.expenses.R
 import com.unex.expenses.SpendingList
 import com.unex.expenses.vms.DailySpendingViewModel
 import kotlinx.android.synthetic.main.content_daily_spending.*
-import kotlinx.android.synthetic.main.content_daily_spending.view.*
-import kotlinx.android.synthetic.main.fragment_daily_spending.view.*
+import kotlinx.android.synthetic.main.fragment_daily_spending.*
 
 class DailySpendingFragment : Fragment() {
 
@@ -29,31 +28,41 @@ class DailySpendingFragment : Fragment() {
             state: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_daily_spending, container, false)
-        view.spendingsButton.setOnClickListener {
+        val limit = model.getDailyLimit()
+
+        model.daySpendings.observe(this, Observer<SpendingList> {
+            val spent = it?.fold(0, { acum, spending -> acum + spending.getAmount() }) ?: 0
+            val available = if (limit - spent > 0) limit - spent else 0
             fragmentManager
                     ?.beginTransaction()
-                    ?.replace(R.id.container, SpendingListFragment())
-                    ?.addToBackStack(null)
+                    ?.replace(R.id.spent, StatsCardFragment.create("Spent", spent))
+                    ?.replace(R.id.available, StatsCardFragment.create("Available", available))
                     ?.commit()
-        }
-        view.addSpendingButton.setOnClickListener {
+        })
+
+        fragmentManager
+                ?.beginTransaction()
+                ?.add(R.id.limit, StatsCardFragment.create("Limit", limit))
+                ?.commit()
+
+        return view
+    }
+
+    override fun onViewCreated(view: View, state: Bundle?) {
+        super.onViewCreated(view, state)
+        addSpendingButton.setOnClickListener {
             fragmentManager
                     ?.beginTransaction()
                     ?.replace(R.id.container, NewSpendingFragment())
                     ?.addToBackStack(null)
                     ?.commit()
         }
-        return view
-    }
-
-    override fun onStart() {
-        super.onStart()
-        dailyLimitLabel.text = model.getDailyLimit().toString()
-        model.daySpendings.observe(this, Observer<SpendingList> {
-            val count = it?.fold(0, { acum, spending -> acum + spending.getAmount() }) ?: 0
-            dailySpentLabel.text = count.toString()
-            val available = model.getDailyLimit() - count
-            dailyAvailableLabel.text = if (available > 0) available.toString() else "0"
-        })
+        spendingListButton.setOnClickListener {
+            fragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.container, SpendingListFragment())
+                    ?.addToBackStack(null)
+                    ?.commit()
+        }
     }
 }
