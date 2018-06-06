@@ -9,4 +9,18 @@
             android:summary="The amount allowed to spend daily"
             android:title="@string/preference_limit_amount" />
     </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/preference_notifications_category">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="notification_remember"
+            android:title="@string/preference_remember_load_data_notification"
+            android:summary="@string/preference_remember_load_data_notification_summary"/>
+
+        <com.unex.expenses.dialogs.TimePreference
+            android:key="notification_hour"
+            android:title="@string/preference_trigger_hour_remember"
+            android:summary="@string/preference_trigger_hour_remember_summary"
+            android:dialogTitle=""/>
+    </PreferenceCategory>
 </PreferenceScreen>

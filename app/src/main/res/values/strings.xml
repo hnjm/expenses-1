@@ -31,9 +31,19 @@
     <string name="error_empty_amount">Please specify an amount</string>
     <string name="error_invalid_amount">The amount entered is not a number</string>
 
+    <string name="preference_notifications_category">Notifications</string>
+    <string name="preference_trigger_hour_remember">Trigger hour remember notification</string>
+    <string name="preference_trigger_hour_remember_summary">Hour to trigger remember load data notification</string>
+    <string name="preference_remember_load_data_notification">Remember load data notification</string>
+    <string name="preference_remember_load_data_notification_summary">Enable/Disable remember load data notification</string>
     <string name="preference_limit_category">Daily limit</string>
     <string name="preference_limit_amount">Amount</string>
     <string name="preference_limit_amount_summary">Set a daily limit to spend</string>
+
+    <string name="notification_remember_load_data_title">¿Cargaste tus gastos?</string>
+    <string name="notification_remember_load_data_text">Si todavía no cargaste tus gastos hoy, entrá!</string>
+    <string name="notification_default_title">Expenses</string>
+    <string name="notification_default_text">Nueva notificación</string>
 
     <string name="label_spending_details">Spending Details</string>
     <string name="label_tag_color">Tag Color</string>
