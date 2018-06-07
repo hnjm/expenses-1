@@ -11,7 +11,7 @@ import com.unex.expenses.models.Spending
 @Dao
 interface SpendingDao {
 
-    @Query("SELECT * FROM spendings WHERE date >= :limit")
+    @Query("SELECT * FROM spendings WHERE date >= :limit ORDER BY date DESC")
     fun retrieve(limit: Long): LiveData<SpendingList>
 
     @Insert()
