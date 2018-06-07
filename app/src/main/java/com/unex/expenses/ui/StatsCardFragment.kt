@@ -5,10 +5,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.unex.expenses.LABEL
 import com.unex.expenses.R
 import com.unex.expenses.VALUE
+import kotlinx.android.synthetic.main.fragment_stats_card.*
 
 class StatsCardFragment : Fragment() {
 
@@ -16,13 +16,14 @@ class StatsCardFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             state: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_stats_card, container, false)
+    ): View = inflater.inflate(R.layout.fragment_stats_card, container, false)
+
+    override fun onViewCreated(view: View, state: Bundle?) {
+        super.onViewCreated(view, state)
         arguments?.let {
-            view.findViewById<TextView>(R.id.statLabel).text = it.getString(LABEL)
-            view.findViewById<TextView>(R.id.statValue).text = "$ ${it.getInt(VALUE)}"
+            statLabel.text = it.getString(LABEL)
+            statValue.text = getString(R.string.value_amount, it.getInt(VALUE))
         }
-        return view
     }
 
     companion object {

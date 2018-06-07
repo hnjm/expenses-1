@@ -12,6 +12,6 @@ object SpendingRepository {
     fun addSpending(spending: Spending) =
             Database.get().spendingDao().insert(spending)
 
-//    fun deleteSpending(spending: Spending) =
-//            Database.get().spendingDao().delete(spending)
+    fun deleteSpending(spending: Spending) =
+            Database.get().spendingDao().delete(spending)
 }

@@ -11,12 +11,12 @@ import java.util.*
 
 class NewSpendingViewModel(app: Application) : AndroidViewModel(app) {
 
-    val dateData: MutableLiveData<Date> = MutableLiveData()
-    val tagsData: MutableLiveData<TagSet> = MutableLiveData()
+    val dateObs: MutableLiveData<Date> = MutableLiveData()
+    val tagsObs: MutableLiveData<TagSet> = MutableLiveData()
 
     init {
-        dateData.value = Date()
-        tagsData.value = setOf()
+        dateObs.value = Date()
+        tagsObs.value = setOf()
     }
 
     fun addSpending(spending: Spending) {
@@ -24,18 +24,18 @@ class NewSpendingViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun getDate(): Date {
-        return dateData.value ?: Date()
+        return dateObs.value ?: Date()
     }
 
     fun getTags(): TagSet {
-        return tagsData.value ?: setOf()
+        return tagsObs.value ?: setOf()
     }
 
     fun setDate(year: Int, month: Int, day: Int) {
-        dateData.value = DateHelper.createDate(year, month, day)
+        dateObs.value = DateHelper.createDate(year, month, day)
     }
 
     fun setTags(newTags: TagSet) {
-        tagsData.value = newTags
+        tagsObs.value = newTags
     }
 }

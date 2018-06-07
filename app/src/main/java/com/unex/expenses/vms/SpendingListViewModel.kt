@@ -3,6 +3,7 @@ package com.unex.expenses.vms
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MediatorLiveData
+import android.os.AsyncTask
 import com.unex.expenses.SpendingList
 import com.unex.expenses.repositories.SpendingRepository
 
@@ -11,7 +12,7 @@ class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
     private var storedSpendings: SpendingList = emptyList()
     private var selectedTags: Set<String> = emptySet()
 
-    private val spendingsObs: MediatorLiveData<SpendingList> = MediatorLiveData()
+    val spendingsObs: MediatorLiveData<SpendingList> = MediatorLiveData()
 
     private fun getFilteredSpendings() = storedSpendings.filter {
         selectedTags.isEmpty() || it.getTags().intersect(selectedTags).isNotEmpty()
@@ -27,11 +28,16 @@ class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
         })
     }
 
-    fun getSpendings() = spendingsObs
-
     fun setSelectedTags(tags: Set<String>) {
         selectedTags = tags
         val spendings = getFilteredSpendings()
         spendingsObs.postValue(spendings)
+    }
+
+    fun deleteSpending(spendingId: Long) {
+        val spending = storedSpendings.find { spendingId == it.getId() }
+        spending?.let {
+            AsyncTask.execute { SpendingRepository.deleteSpending(it) }
+        }
     }
 }

@@ -5,7 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import com.unex.expenses.R
-import com.unex.expenses.events.TagsPicked
+import com.unex.expenses.TagsPicked
 import org.greenrobot.eventbus.EventBus
 
 class TagsDialog : DialogFragment() {
@@ -14,26 +14,23 @@ class TagsDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val tags = resources.getStringArray(R.array.default_tags)
-        val selectionFlags = selections.fold(
-                tags.map { false }.toBooleanArray()
-        ) { acc, i ->
-            acc[i] = true
-            acc
-        }
         val builder = AlertDialog.Builder(activity)
-        builder.setTitle(R.string.dialog_tags_title)
-        builder.setMultiChoiceItems(R.array.default_tags, selectionFlags, { _, which, isChecked ->
-            if (isChecked) {
-                selections.add(which)
-            } else {
-                selections.remove(which)
-            }
+        builder.setTitle(R.string.dialog_title_tags)
+        builder.setMultiChoiceItems(tags, getSelectedTags(tags), { _, which, isChecked ->
+            if (isChecked) selections.add(which) else selections.remove(which)
         })
-        builder.setPositiveButton(R.string.dialog_tags_ok, { _, _ ->
-
+        builder.setPositiveButton(R.string.dialog_action_ok, { _, _ ->
             val tagList = selections.map { tags[it] }
             EventBus.getDefault().post(TagsPicked(tagList.toSet()))
         })
         return builder.create();
+    }
+
+    private fun getSelectedTags(tags: Array<String>): BooleanArray {
+        val emptyOptions = tags.map { false }.toBooleanArray()
+        return selections.fold(emptyOptions) { acc, i ->
+            acc[i] = true
+            acc
+        }
     }
 }

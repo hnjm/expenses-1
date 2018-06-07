@@ -10,10 +10,11 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.unex.expenses.DIALOG_TAGS
 import com.unex.expenses.R
 import com.unex.expenses.TagSet
+import com.unex.expenses.TagsPicked
 import com.unex.expenses.dialogs.TagsDialog
-import com.unex.expenses.events.TagsPicked
 import com.unex.expenses.models.DateHelper
 import com.unex.expenses.models.Spending
 import com.unex.expenses.models.Validations
@@ -33,8 +34,11 @@ class NewSpendingFragment : Fragment() {
         model = ViewModelProviders.of(this).get(NewSpendingViewModel::class.java)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, state: Bundle?): View =
-            inflater.inflate(R.layout.fragment_new_spending, container, false)
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            state: Bundle?
+    ): View = inflater.inflate(R.layout.fragment_new_spending, container, false)
 
     override fun onViewCreated(view: View, state: Bundle?) {
         super.onViewCreated(view, state)
@@ -52,17 +56,17 @@ class NewSpendingFragment : Fragment() {
             ).show()
         }
 
-        model.dateData.observe(this, Observer<Date> { date ->
+        model.dateObs.observe(this, Observer<Date> { date ->
             date?.let { dateButton.text = DateHelper.getDateString(it) }
         })
 
-        model.tagsData.observe(this, Observer<TagSet> { tags ->
+        model.tagsObs.observe(this, Observer<TagSet> { tags ->
             tags?.let { if (it.isNotEmpty()) tagsButton.text = it.joinToString(", ") }
         })
 
         val tagsDialog = TagsDialog()
         tagsButton.setOnClickListener {
-            tagsDialog.show(fragmentManager, tagsDialog.javaClass.name)
+            tagsDialog.show(fragmentManager, DIALOG_TAGS)
         }
 
         createSpendingButton.setOnClickListener {
@@ -75,9 +79,9 @@ class NewSpendingFragment : Fragment() {
                 AsyncTask.execute { model.addSpending(spending) }
                 fragmentManager?.popBackStack()
             } catch (exc: NumberFormatException) {
-                Snackbar.make(view, "The amount entered is not a number", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, R.string.error_invalid_amount, Snackbar.LENGTH_SHORT).show();
             } catch (exc: Exception) {
-                Snackbar.make(view, "Please complete the amount", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, R.string.error_empty_amount, Snackbar.LENGTH_SHORT).show();
             }
         }
     }

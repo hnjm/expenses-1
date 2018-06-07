@@ -13,5 +13,5 @@ class DailySpendingViewModel(val app: Application) : AndroidViewModel(app) {
         return preferences.getString("daily_limit", "0").toInt()
     }
 
-    val daySpendings = SpendingRepository.getSpendings(DateHelper.startOfDayTimestamp())
+    val spendingsObs = SpendingRepository.getSpendings(DateHelper.startOfDayTimestamp())
 }

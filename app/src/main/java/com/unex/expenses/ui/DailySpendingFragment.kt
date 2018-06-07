@@ -26,27 +26,7 @@ class DailySpendingFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             state: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_daily_spending, container, false)
-        val limit = model.getDailyLimit()
-
-        model.daySpendings.observe(this, Observer<SpendingList> {
-            val spent = it?.fold(0, { acum, spending -> acum + spending.getAmount() }) ?: 0
-            val available = if (limit - spent > 0) limit - spent else 0
-            fragmentManager
-                    ?.beginTransaction()
-                    ?.replace(R.id.spent, StatsCardFragment.create("Spent", spent))
-                    ?.replace(R.id.available, StatsCardFragment.create("Available", available))
-                    ?.commit()
-        })
-
-        fragmentManager
-                ?.beginTransaction()
-                ?.add(R.id.limit, StatsCardFragment.create("Limit", limit))
-                ?.commit()
-
-        return view
-    }
+    ): View = inflater.inflate(R.layout.fragment_daily_spending, container, false)
 
     override fun onViewCreated(view: View, state: Bundle?) {
         super.onViewCreated(view, state)
@@ -64,5 +44,31 @@ class DailySpendingFragment : Fragment() {
                     ?.addToBackStack(null)
                     ?.commit()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val limit = model.getDailyLimit()
+        val limitLabel = getString(R.string.label_limit)
+        val spentLabel = getString(R.string.label_spent)
+        val availableLabel = getString(R.string.label_available)
+
+        val limitFragment = StatsCardFragment.create(limitLabel, limit)
+        fragmentManager
+                ?.beginTransaction()
+                ?.add(R.id.limit, limitFragment)
+                ?.commit()
+
+        model.spendingsObs.observe(this, Observer<SpendingList> {
+            val spent = it?.fold(0, { acum, spending -> acum + spending.getAmount() }) ?: 0
+            val available = if (limit - spent > 0) limit - spent else 0
+            val spentFragment = StatsCardFragment.create(spentLabel, spent)
+            val availableFragment = StatsCardFragment.create(availableLabel, available)
+            fragmentManager
+                    ?.beginTransaction()
+                    ?.replace(R.id.spent, spentFragment)
+                    ?.replace(R.id.available, availableFragment)
+                    ?.commit()
+        })
     }
 }

@@ -7,4 +7,10 @@
         android:icon="@drawable/ic_settings"
         android:title="@string/menu_settings"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/filter"
+        android:icon="@drawable/ic_filter"
+        android:title="@string/menu_filter"
+        app:showAsAction="ifRoom" />
 </menu>
