@@ -1,4 +1,4 @@
-package com.unex.expenses.ui
+package com.unex.expenses.ui.fragments
 
 import android.os.Bundle
 import android.preference.PreferenceFragment

@@ -1,5 +1,6 @@
 package com.unex.expenses
 
+const val DB_NAME: String = "spendings"
 const val LABEL: String = "label"
 const val VALUE: String = "value"
 const val SPENDING_ID: String = "spending_id"

@@ -1,4 +1,4 @@
-package com.unex.expenses.ui
+package com.unex.expenses.ui.fragments
 
 import android.app.DatePickerDialog
 import android.arch.lifecycle.Observer

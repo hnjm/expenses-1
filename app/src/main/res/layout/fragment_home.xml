@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/content"
-        layout="@layout/content_daily_spending" />
+        layout="@layout/content_home" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addSpendingButton"

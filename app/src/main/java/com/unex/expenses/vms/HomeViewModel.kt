@@ -6,7 +6,7 @@ import android.preference.PreferenceManager
 import com.unex.expenses.models.DateHelper
 import com.unex.expenses.repositories.SpendingRepository
 
-class DailySpendingViewModel(val app: Application) : AndroidViewModel(app) {
+class HomeViewModel(val app: Application) : AndroidViewModel(app) {
 
     fun getDailyLimit(): Int {
         val preferences = PreferenceManager.getDefaultSharedPreferences(app)

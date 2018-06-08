@@ -3,5 +3,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include layout="@layout/content_spendings" />
+    <include layout="@layout/content_spending_list" />
 </android.support.design.widget.CoordinatorLayout>

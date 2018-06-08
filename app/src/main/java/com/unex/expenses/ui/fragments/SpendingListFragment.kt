@@ -1,4 +1,4 @@
-package com.unex.expenses.ui
+package com.unex.expenses.ui.fragments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -14,10 +14,9 @@ import com.unex.expenses.adapters.SpendingAdapter
 import com.unex.expenses.dialogs.DeleteConfirmationDialog
 import com.unex.expenses.dialogs.TagsDialog
 import com.unex.expenses.vms.SpendingListViewModel
-import kotlinx.android.synthetic.main.content_spendings.*
+import kotlinx.android.synthetic.main.content_spending_list.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
-
 
 class SpendingListFragment : Fragment() {
 
@@ -46,7 +45,7 @@ class SpendingListFragment : Fragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             state: Bundle?
-    ): View = inflater.inflate(R.layout.fragment_spendings, container, false)
+    ): View = inflater.inflate(R.layout.fragment_spending_list, container, false)
 
     override fun onViewCreated(view: View, state: Bundle?) {
         super.onViewCreated(view, state)

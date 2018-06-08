@@ -26,6 +26,7 @@
 
     <string name="description_logo">Logo</string>
     <string name="description_delete">Delete</string>
+    <string name="description_color">Color</string>
 
     <string name="error_empty_amount">Please specify an amount</string>
     <string name="error_invalid_amount">The amount entered is not a number</string>

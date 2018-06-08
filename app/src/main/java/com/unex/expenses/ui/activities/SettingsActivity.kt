@@ -1,7 +1,8 @@
-package com.unex.expenses.ui
+package com.unex.expenses.ui.activities
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.unex.expenses.ui.fragments.SettingsFragment
 
 class SettingsActivity : AppCompatActivity() {
 
