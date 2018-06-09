@@ -15,7 +15,7 @@ import com.unex.expenses.R
 import com.unex.expenses.TagSet
 import com.unex.expenses.TagsPicked
 import com.unex.expenses.dialogs.TagsDialog
-import com.unex.expenses.models.DateHelper
+import com.unex.expenses.models.Dates
 import com.unex.expenses.models.Spending
 import com.unex.expenses.models.Validations
 import com.unex.expenses.vms.NewSpendingViewModel
@@ -42,7 +42,7 @@ class NewSpendingFragment : Fragment() {
 
     override fun onViewCreated(view: View, state: Bundle?) {
         super.onViewCreated(view, state)
-        dateButton.text = DateHelper.getDateString(model.getDate())
+        dateButton.text = Dates.dateString(model.getDate())
         dateButton.setOnClickListener {
             val listener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
                 model.setDate(year, month, day)
@@ -50,14 +50,14 @@ class NewSpendingFragment : Fragment() {
             DatePickerDialog(
                     activity,
                     listener,
-                    DateHelper.getCurrentYear(),
-                    DateHelper.getCurrentMonth(),
-                    DateHelper.getCurrentDay()
+                    Dates.currentYear(),
+                    Dates.currentMonth(),
+                    Dates.currentDay()
             ).show()
         }
 
         model.dateObs.observe(this, Observer<Date> { date ->
-            date?.let { dateButton.text = DateHelper.getDateString(it) }
+            date?.let { dateButton.text = Dates.dateString(it) }
         })
 
         model.tagsObs.observe(this, Observer<TagSet> { tags ->
