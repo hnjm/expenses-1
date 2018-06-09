@@ -3,8 +3,9 @@ package com.unex.expenses.vms
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.preference.PreferenceManager
-import com.unex.expenses.models.DateHelper
-import com.unex.expenses.repositories.SpendingRepository
+import com.unex.expenses.models.Moment
+import com.unex.expenses.models.Timestamps
+import com.unex.expenses.persistence.Database
 
 class HomeViewModel(val app: Application) : AndroidViewModel(app) {
 
@@ -13,5 +14,5 @@ class HomeViewModel(val app: Application) : AndroidViewModel(app) {
         return preferences.getString("daily_limit", "0").toInt()
     }
 
-    val spendingsObs = SpendingRepository.getSpendings(DateHelper.startOfDayTimestamp())
+    val spendingsObs = Database.get().spendingDao().retrieve(Timestamps.startOf(Moment.DAY))
 }

@@ -5,7 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MediatorLiveData
 import android.os.AsyncTask
 import com.unex.expenses.SpendingList
-import com.unex.expenses.repositories.SpendingRepository
+import com.unex.expenses.persistence.Database
 
 class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -19,7 +19,7 @@ class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     init {
-        spendingsObs.addSource(SpendingRepository.getSpendings(), {
+        spendingsObs.addSource(Database.get().spendingDao().retrieve(), {
             it?.let {
                 storedSpendings = it
                 val spendings = getFilteredSpendings()
@@ -37,7 +37,7 @@ class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
     fun deleteSpending(spendingId: Long) {
         val spending = storedSpendings.find { spendingId == it.getId() }
         spending?.let {
-            AsyncTask.execute { SpendingRepository.deleteSpending(it) }
+            AsyncTask.execute { Database.get().spendingDao().delete(it) }
         }
     }
 }

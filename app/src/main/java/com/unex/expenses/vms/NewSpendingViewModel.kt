@@ -4,9 +4,9 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.unex.expenses.TagSet
-import com.unex.expenses.models.DateHelper
+import com.unex.expenses.models.Dates
 import com.unex.expenses.models.Spending
-import com.unex.expenses.repositories.SpendingRepository
+import com.unex.expenses.persistence.Database
 import java.util.*
 
 class NewSpendingViewModel(app: Application) : AndroidViewModel(app) {
@@ -20,7 +20,7 @@ class NewSpendingViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun addSpending(spending: Spending) {
-        SpendingRepository.addSpending(spending)
+        Database.get().spendingDao().insert(spending)
     }
 
     fun getDate(): Date {
@@ -32,7 +32,7 @@ class NewSpendingViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun setDate(year: Int, month: Int, day: Int) {
-        dateObs.value = DateHelper.createDate(year, month, day)
+        dateObs.value = Dates.createDate(year, month, day)
     }
 
     fun setTags(newTags: TagSet) {
