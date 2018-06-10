@@ -2,84 +2,55 @@ package com.unex.expenses.dialogs
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.widget.TimePicker
 import android.preference.DialogPreference
 import android.util.AttributeSet
 import android.view.View
+import android.widget.TimePicker
+import com.unex.expenses.DEFAULT_TIME
+import com.unex.expenses.R
 
+class TimePreference(context: Context, attrs: AttributeSet) : DialogPreference(context, attrs) {
 
-class TimePreference(ctxt: Context, attrs: AttributeSet) : DialogPreference(ctxt, attrs) {
     private var lastHour = 0
     private var lastMinute = 0
-    private var picker: TimePicker? = null
+    private lateinit var picker: TimePicker
 
     init {
-
-        positiveButtonText = "Set"
-        negativeButtonText = "Cancel"
+        positiveButtonText = context.getString(R.string.dialog_action_set)
+        negativeButtonText = context.getString(R.string.dialog_action_cancel)
     }
 
     override fun onCreateDialogView(): View {
         picker = TimePicker(context)
-        picker!!.setIs24HourView(true)
+        picker.setIs24HourView(true)
+        picker.hour = lastHour
+        picker.minute = lastMinute
         return picker as TimePicker
-    }
-
-    protected override fun onBindDialogView(v: View) {
-        super.onBindDialogView(v)
-
-        picker!!.currentHour = lastHour
-        picker!!.currentMinute = lastMinute
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {
         super.onDialogClosed(positiveResult)
-
         if (positiveResult) {
-            lastHour = picker!!.currentHour
-            lastMinute = picker!!.currentMinute
-
-            val time = lastHour.toString() + ":" + lastMinute.toString()
-
+            lastHour = picker.hour
+            lastMinute = picker.minute
+            val time = "$lastHour:$lastMinute"
             if (callChangeListener(time)) {
                 persistString(time)
             }
         }
     }
 
-    override fun onGetDefaultValue(a: TypedArray, index: Int): Any? {
-        return a.getString(index)
+    override fun onGetDefaultValue(array: TypedArray, index: Int): Any? {
+        return array.getString(index)
     }
 
     override fun onSetInitialValue(restoreValue: Boolean, defaultValue: Any?) {
-        var time: String? = null
-
-        if (restoreValue) {
-            if (defaultValue == null) {
-                time = getPersistedString("00:00")
-            } else {
-                time = getPersistedString(defaultValue.toString())
-            }
+        val time = if (restoreValue) {
+            getPersistedString(defaultValue?.toString() ?: DEFAULT_TIME)
         } else {
-            time = defaultValue!!.toString()
+            defaultValue!!.toString()
         }
-
-        lastHour = getHour(time)
-        lastMinute = getMinute(time)
-    }
-
-    companion object {
-
-        fun getHour(time: String?): Int {
-            val pieces = time!!.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
-            return Integer.parseInt(pieces[0])
-        }
-
-        fun getMinute(time: String?): Int {
-            val pieces = time!!.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-
-            return Integer.parseInt(pieces[1])
-        }
+        lastHour = time.split(":")[0].toInt()
+        lastMinute = time.split(":")[1].toInt()
     }
 }

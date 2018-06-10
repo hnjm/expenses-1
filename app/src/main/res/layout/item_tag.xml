@@ -7,7 +7,7 @@
     android:layout_margin="4dp"
     android:background="@drawable/label"
     android:gravity="center"
-    android:paddingEnd="8dp"
     android:paddingStart="8dp"
+    android:paddingEnd="8dp"
     android:textColor="@color/white"
     tools:text="20/10/2010" />
