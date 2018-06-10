@@ -5,7 +5,7 @@ import java.util.*
 object Timestamps {
 
     fun startOf(start: Moment, date: Date = Date()): Long {
-        val calendar = GregorianCalendar()
+        val calendar = Calendar.getInstance()
         return with(calendar) {
             time = date
             when (start) {

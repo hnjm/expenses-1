@@ -9,7 +9,9 @@ object Database {
     private lateinit var database: AppDatabase
 
     fun setUp(context: Context) {
-        database = Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME).build()
+        database = Room.databaseBuilder(context, AppDatabase::class.java, DB_NAME)
+                .fallbackToDestructiveMigration()
+                .build()
     }
 
     fun get() = database

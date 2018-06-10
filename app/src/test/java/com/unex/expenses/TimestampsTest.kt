@@ -13,7 +13,7 @@ class TimestampsTest {
 
     @Test
     fun startOfDay() {
-        val calendar = GregorianCalendar()
+        val calendar = Calendar.getInstance()
         calendar.timeInMillis = Timestamps.startOf(Moment.DAY, date)
         assertEquals(5, calendar.get(Calendar.MONTH))
         assertEquals(2, calendar.get(Calendar.DAY_OF_MONTH))
@@ -25,7 +25,7 @@ class TimestampsTest {
 
     @Test
     fun startOfWeek() {
-        val calendar = GregorianCalendar()
+        val calendar = Calendar.getInstance()
         calendar.timeInMillis = Timestamps.startOf(Moment.WEEK, date)
         assertEquals(4, calendar.get(Calendar.MONTH))
         assertEquals(28, calendar.get(Calendar.DAY_OF_MONTH))
@@ -37,7 +37,7 @@ class TimestampsTest {
 
     @Test
     fun startOfMonth() {
-        val calendar = GregorianCalendar()
+        val calendar = Calendar.getInstance()
         calendar.timeInMillis = Timestamps.startOf(Moment.MONTH, date)
         assertEquals(5, calendar.get(Calendar.MONTH))
         assertEquals(1, calendar.get(Calendar.DAY_OF_MONTH))

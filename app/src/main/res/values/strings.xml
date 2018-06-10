@@ -13,8 +13,11 @@
     <string name="hint_description">Description (optional)</string>
     <string name="hint_name">Name</string>
 
+    <string name="empty"></string>
+
     <string name="dialog_title_tags">Tags</string>
     <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_set">Set</string>
     <string name="dialog_action_delete">Delete</string>
     <string name="dialog_action_cancel">Cancel</string>
     <string name="dialog_message_delete_confirmation">Are you sure you want to delete this spending?</string>
@@ -31,9 +34,19 @@
     <string name="error_empty_amount">Please specify an amount</string>
     <string name="error_invalid_amount">The amount entered is not a number</string>
 
-    <string name="preference_limit_category">Daily limit</string>
-    <string name="preference_limit_amount">Amount</string>
-    <string name="preference_limit_amount_summary">Set a daily limit to spend</string>
+    <string name="preference_category_daily_limit">Daily limit</string>
+    <string name="preference_category_notifications">Notifications</string>
+
+    <string name="preference_summary_daily_limit_amount">Set a daily limit to spend</string>
+    <string name="preference_summary_reminder_notification_enabled">The app will remind you every day to register your spendings</string>
+    <string name="preference_summary_reminder_notification_time">Set the time when you want to receive the reminders</string>
+
+    <string name="preference_title_daily_limit_amount">Daily amount</string>
+    <string name="preference_title_reminder_notification_enabled">Reminder notifications</string>
+    <string name="preference_title_reminder_notification_time">Reminders time</string>
+
+    <string name="notification_reminder_title">Time to register today spendings!</string>
+    <string name="notification_reminder_text">Enter and register today spendings to keep up to date</string>
 
     <string name="label_spending_details">Spending Details</string>
     <string name="label_tag_color">Tag Color</string>
