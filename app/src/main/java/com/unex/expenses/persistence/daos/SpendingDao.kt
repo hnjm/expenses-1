@@ -1,4 +1,4 @@
-package com.unex.expenses.persistence
+package com.unex.expenses.persistence.daos
 
 import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
@@ -7,8 +7,8 @@ import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import com.unex.expenses.SpendingList
 import com.unex.expenses.models.Moment
-import com.unex.expenses.models.Spending
 import com.unex.expenses.models.Timestamps
+import com.unex.expenses.persistence.entities.Spending
 
 @Dao
 interface SpendingDao {

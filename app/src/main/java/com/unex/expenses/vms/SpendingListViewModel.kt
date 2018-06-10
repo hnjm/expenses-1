@@ -15,7 +15,7 @@ class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
     val spendingsObs: MediatorLiveData<SpendingList> = MediatorLiveData()
 
     private fun getFilteredSpendings() = storedSpendings.filter {
-        selectedTags.isEmpty() || it.getTags().intersect(selectedTags).isNotEmpty()
+        selectedTags.isEmpty() || it.tags.intersect(selectedTags).isNotEmpty()
     }
 
     init {
@@ -35,7 +35,7 @@ class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
     }
 
     fun deleteSpending(spendingId: Long) {
-        val spending = storedSpendings.find { spendingId == it.getId() }
+        val spending = storedSpendings.find { spendingId == it.id }
         spending?.let {
             AsyncTask.execute { Database.get().spendingDao().delete(it) }
         }

@@ -5,8 +5,8 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import com.unex.expenses.TagSet
 import com.unex.expenses.models.Dates
-import com.unex.expenses.models.Spending
 import com.unex.expenses.persistence.Database
+import com.unex.expenses.persistence.entities.Spending
 import java.util.*
 
 class NewSpendingViewModel(app: Application) : AndroidViewModel(app) {

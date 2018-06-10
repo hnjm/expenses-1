@@ -47,7 +47,7 @@ class HomeFragment : BaseFragment() {
                 ?.commit()
 
         model.spendingsObs.observe(this, Observer<SpendingList> {
-            val spent = it?.fold(0, { acum, spending -> acum + spending.getAmount() }) ?: 0
+            val spent = it?.fold(0, { acum, spending -> acum + spending.amount }) ?: 0
             val available = if (limit - spent > 0) limit - spent else 0
             val spentFragment = StatsCardFragment.create(spentLabel, spent)
             val availableFragment = StatsCardFragment.create(availableLabel, available)

@@ -17,4 +17,8 @@
     <color name="tag_violet">#8e43e7</color>
     <color name="tag_grey">#a7a9ac</color>
     <color name="tag_brown">#a25016</color>
+    <color name="tag_light_blue">#0dd3ff</color>
+    <color name="tag_light_green">#8ee000</color>
+    <color name="tag_black">#333333</color>
+    <color name="tag_pink">#f7c8c9</color>
 </resources>

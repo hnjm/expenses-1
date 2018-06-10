@@ -1,51 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="16dp">
 
         <Button
             android:id="@+id/dateButton"
             style="@style/FormCard"
-            android:drawableEnd="@drawable/ic_chevron"
             android:drawableStart="@drawable/ic_calendar"
-            app:layout_constraintBottom_toTopOf="@id/tagsButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:drawableEnd="@drawable/ic_chevron"
+            tools:text="June 2, 1993" />
 
         <Button
             android:id="@+id/tagsButton"
             style="@style/FormCard"
             android:layout_marginTop="16dp"
-            android:drawableEnd="@drawable/ic_chevron"
             android:drawableStart="@drawable/ic_tags"
-            android:text="@string/hint_tags"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/dateButton" />
+            android:drawableEnd="@drawable/ic_chevron"
+            android:text="@string/hint_tags" />
 
         <LinearLayout
             style="@style/FormCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/tagsButton">
+            android:orientation="vertical">
 
             <TextView
-                style="@style/TextAppearance.AppCompat.Medium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_details"
-                android:textColor="@color/accent" />
+                android:text="@string/label_spending_details"
+                android:textColor="@color/accent"
+                android:textSize="16sp" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/amountLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp">
@@ -60,7 +54,6 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/descriptionLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp">
@@ -74,5 +67,5 @@
                     tools:text="Some description" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
 </ScrollView>

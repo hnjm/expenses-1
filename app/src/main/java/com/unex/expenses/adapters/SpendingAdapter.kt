@@ -4,7 +4,7 @@ import android.support.v7.recyclerview.extensions.ListAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.unex.expenses.R
-import com.unex.expenses.models.Spending
+import com.unex.expenses.persistence.entities.Spending
 
 class SpendingAdapter : ListAdapter<Spending, SpendingView>(SpendingDiff()) {
 

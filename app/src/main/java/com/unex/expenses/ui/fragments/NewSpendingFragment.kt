@@ -16,8 +16,8 @@ import com.unex.expenses.TagSet
 import com.unex.expenses.TagsPicked
 import com.unex.expenses.dialogs.TagsDialog
 import com.unex.expenses.models.Dates
-import com.unex.expenses.models.Spending
 import com.unex.expenses.models.Validations
+import com.unex.expenses.persistence.entities.Spending
 import com.unex.expenses.vms.NewSpendingViewModel
 import kotlinx.android.synthetic.main.content_new_spending.*
 import kotlinx.android.synthetic.main.fragment_new_spending.*
@@ -71,16 +71,16 @@ class NewSpendingFragment : Fragment() {
 
         createSpendingButton.setOnClickListener {
             try {
-                val amount = Validations.validateAmount(amountInput.text.toString()).toInt()
+                val amount = Validations.parseAmount(amountInput.text.toString())
                 val description = descriptionInput.text.toString().let {
                     if (it.isEmpty()) null else it
                 }
-                val spending = Spending(amount, model.getDate(), model.getTags(), description)
+                val spending = Spending(amount, model.getDate(), description, model.getTags())
                 AsyncTask.execute { model.addSpending(spending) }
                 fragmentManager?.popBackStack()
             } catch (exc: NumberFormatException) {
                 Snackbar.make(view, R.string.error_invalid_amount, Snackbar.LENGTH_SHORT).show();
-            } catch (exc: Exception) {
+            } catch (exc: Validations.EmptyAmountException) {
                 Snackbar.make(view, R.string.error_empty_amount, Snackbar.LENGTH_SHORT).show();
             }
         }

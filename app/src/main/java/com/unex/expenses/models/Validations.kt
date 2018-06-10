@@ -2,11 +2,10 @@ package com.unex.expenses.models
 
 object Validations {
 
-    fun validateAmount(value: String): String {
-        if (value.isEmpty()) {
-            throw Exception("String is empty")
-        } else {
-            return value
-        }
+    class EmptyAmountException : Exception()
+
+    fun parseAmount(amount: String): Int {
+        if (amount.isEmpty()) throw EmptyAmountException()
+        return amount.toInt()
     }
 }
