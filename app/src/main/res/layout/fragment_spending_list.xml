@@ -4,4 +4,12 @@
     android:layout_height="match_parent">
 
     <include layout="@layout/content_spending_list" />
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/label_no_spendings"
+        android:textSize="20sp" />
 </android.support.design.widget.CoordinatorLayout>

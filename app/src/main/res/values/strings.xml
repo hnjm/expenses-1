@@ -14,8 +14,6 @@
     <string name="hint_description">Description (optional)</string>
     <string name="hint_name">Name</string>
 
-    <string name="empty" />
-
     <string name="dialog_title_tags">Tags</string>
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_set">Set</string>
@@ -54,6 +52,7 @@
     <string name="label_limit">Limit</string>
     <string name="label_spent">Spent</string>
     <string name="label_available">Available</string>
+    <string name="label_no_spendings">No spendings found</string>
 
     <string-array name="default_tags">
         <item>Food</item>
