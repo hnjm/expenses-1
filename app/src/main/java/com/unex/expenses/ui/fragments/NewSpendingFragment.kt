@@ -1,6 +1,5 @@
 package com.unex.expenses.ui.fragments
 
-import android.app.Activity
 import android.app.DatePickerDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -11,7 +10,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import com.unex.expenses.DIALOG_TAGS
 import com.unex.expenses.R
 import com.unex.expenses.TagSet
@@ -27,8 +25,6 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
 
-
-@Suppress("NAME_SHADOWING")
 class NewSpendingFragment : Fragment() {
 
     private lateinit var model: NewSpendingViewModel
@@ -81,13 +77,7 @@ class NewSpendingFragment : Fragment() {
                 }
                 val spending = Spending(amount, model.getDate(), description, model.getTags())
                 AsyncTask.execute { model.addSpending(spending) }
-
-                val inputManager = activity
-                        ?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputManager.hideSoftInputFromWindow(contentLayout.windowToken, 0)
-
                 fragmentManager?.popBackStack()
-
             } catch (exc: NumberFormatException) {
                 Snackbar.make(view, R.string.error_invalid_amount, Snackbar.LENGTH_SHORT).show();
             } catch (exc: Validations.EmptyAmountException) {
