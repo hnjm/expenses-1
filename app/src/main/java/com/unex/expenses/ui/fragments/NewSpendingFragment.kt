@@ -24,7 +24,12 @@ import kotlinx.android.synthetic.main.fragment_new_spending.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import java.util.*
+import android.app.Activity
+import android.view.inputmethod.InputMethodManager
+import kotlinx.android.synthetic.main.fragment_home.*
 
+
+@Suppress("NAME_SHADOWING")
 class NewSpendingFragment : Fragment() {
 
     private lateinit var model: NewSpendingViewModel
@@ -77,7 +82,13 @@ class NewSpendingFragment : Fragment() {
                 }
                 val spending = Spending(amount, model.getDate(), description, model.getTags())
                 AsyncTask.execute { model.addSpending(spending) }
+
+                val inputMethodManager = activity!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                val view = activity!!.findViewById<View>(R.id.createSpendingButton) ?: View(activity)
+                inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+
                 fragmentManager?.popBackStack()
+
             } catch (exc: NumberFormatException) {
                 Snackbar.make(view, R.string.error_invalid_amount, Snackbar.LENGTH_SHORT).show();
             } catch (exc: Validations.EmptyAmountException) {
