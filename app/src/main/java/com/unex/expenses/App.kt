@@ -5,6 +5,7 @@ import com.unex.expenses.persistence.Database
 
 class App : Application() {
 
+
     override fun onCreate() {
         super.onCreate()
         with(applicationContext) {

@@ -8,7 +8,6 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
-import android.support.v4.app.TaskStackBuilder
 import com.unex.expenses.KEY_REMINDER_ENABLED
 import com.unex.expenses.NOTIFICATION_CHANNEL
 import com.unex.expenses.R
@@ -26,7 +25,7 @@ class NotificationService : IntentService("NotificationService") {
                 resources.getString(getTitle(notificationType)),
                 resources.getString(getText(notificationType))
         )
-        val preferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val notificationsEnabled = preferences.getBoolean(KEY_REMINDER_ENABLED, true)
         if (notificationsEnabled) {
             val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -35,24 +34,24 @@ class NotificationService : IntentService("NotificationService") {
     }
 
     private fun createNotification(title: String, text: String): Notification {
-        val contentIntent = notificationIntent()
         return NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_money)
+                .setColorized(true)
+                .setColor(getColor(R.color.primary))
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setVibrate(longArrayOf(200, 300, 200, 300))
+                .setStyle(NotificationCompat.BigTextStyle().bigText(text))
                 .setContentTitle(title)
                 .setContentText(text)
-                .setContentIntent(contentIntent)
+                .setContentIntent(getPendingIntent())
                 .setAutoCancel(true)
                 .build()
     }
 
-    private fun notificationIntent(): PendingIntent {
-        val builder = TaskStackBuilder.create(this)
-        builder.addParentStack(MainActivity::class.java)
-        builder.addNextIntent(Intent(this, MainActivity::class.java))
-        val contentIntent = builder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-        return contentIntent!!
+    private fun getPendingIntent(): PendingIntent {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        return PendingIntent.getActivity(this, 0, intent, 0)
     }
 
     private fun getTitle(notificationType: NotificationType): Int {
