@@ -5,10 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.unex.expenses.*
 import com.unex.expenses.adapters.SpendingAdapter
 import com.unex.expenses.dialogs.DeleteConfirmationDialog
@@ -29,6 +26,11 @@ class SpendingListFragment : Fragment() {
         super.onCreate(state)
         setHasOptionsMenu(true)
         model = ViewModelProviders.of(this).get(SpendingListViewModel::class.java)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.spendings, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
