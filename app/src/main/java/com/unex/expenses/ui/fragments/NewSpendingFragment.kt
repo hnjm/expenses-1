@@ -84,7 +84,7 @@ class NewSpendingFragment : Fragment() {
                 AsyncTask.execute { model.addSpending(spending) }
 
                 val inputMethodManager = activity!!.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                val view = activity!!.findViewById<View>(R.id.createSpendingButton) ?: View(activity)
+                val view = activity!!.findViewById<View>(R.id.contentLayout) ?: View(activity)
                 inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
 
                 fragmentManager?.popBackStack()
