@@ -17,8 +17,11 @@
             android:summary="@string/preference_summary_reminder_notification_enabled"
             android:title="@string/preference_title_reminder_notification_enabled" />
 
-        <com.unex.expenses.dialogs.TimePreference
-            android:dialogTitle="@string/empty"
+        <ListPreference
+            android:defaultValue="20:00"
+            android:dependency="notification_reminder_enabled"
+            android:entries="@array/preference_reminder_times"
+            android:entryValues="@array/preference_reminder_times"
             android:key="notification_reminder_time"
             android:summary="@string/preference_summary_reminder_notification_time"
             android:title="@string/preference_title_reminder_notification_time" />

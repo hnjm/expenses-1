@@ -13,14 +13,16 @@ import java.util.*
 
 object Notifications {
 
-    fun scheduleNewAlarm(context: Context) {
+    fun scheduleAlarm(context: Context) {
         cancelRunningAlarm(context)
         val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val time = getScheduledTime(context)
+        val pendingIntent = getPendingIntent(context, PendingIntent.FLAG_UPDATE_CURRENT)
         manager.setInexactRepeating(
                 AlarmManager.RTC,
-                getScheduledTime(context),
+                time,
                 AlarmManager.INTERVAL_DAY,
-                getPendingIntent(context, PendingIntent.FLAG_UPDATE_CURRENT)
+                pendingIntent
         )
     }
 

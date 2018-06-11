@@ -4,7 +4,8 @@
 
     <string name="value_amount">$ %d</string>
 
-    <string name="title_spendings">Spendings</string>
+    <string name="title_home">Today</string>
+    <string name="title_spending_list">Spendings</string>
     <string name="title_new_spending">New Spending</string>
     <string name="title_settings">Settings</string>
 
@@ -13,7 +14,7 @@
     <string name="hint_description">Description (optional)</string>
     <string name="hint_name">Name</string>
 
-    <string name="empty"></string>
+    <string name="empty" />
 
     <string name="dialog_title_tags">Tags</string>
     <string name="dialog_action_ok">OK</string>
@@ -43,7 +44,7 @@
 
     <string name="preference_title_daily_limit_amount">Daily amount</string>
     <string name="preference_title_reminder_notification_enabled">Reminder notifications</string>
-    <string name="preference_title_reminder_notification_time">Reminders time</string>
+    <string name="preference_title_reminder_notification_time">Reminder time</string>
 
     <string name="notification_reminder_title">Time to register today spendings!</string>
     <string name="notification_reminder_text">Enter and register today spendings to keep up to date</string>
@@ -85,5 +86,13 @@
         <item>600</item>
         <item>700</item>
         <item>800</item>
+    </string-array>
+
+    <string-array name="preference_reminder_times">
+        <item>19:00</item>
+        <item>20:00</item>
+        <item>21:00</item>
+        <item>22:00</item>
+        <item>23:00</item>
     </string-array>
 </resources>

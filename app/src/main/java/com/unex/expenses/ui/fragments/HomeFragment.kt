@@ -35,6 +35,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
+        activity?.setTitle(R.string.title_home)
         val limit = model.getDailyLimit()
         val limitLabel = getString(R.string.label_limit)
         val spentLabel = getString(R.string.label_spent)
