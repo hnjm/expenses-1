@@ -8,6 +8,7 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.preference.PreferenceManager
 import android.support.v4.app.NotificationCompat
+import com.unex.expenses.DEFAULT_REMINDER_ENABLED
 import com.unex.expenses.KEY_REMINDER_ENABLED
 import com.unex.expenses.NOTIFICATION_CHANNEL
 import com.unex.expenses.R
@@ -26,7 +27,8 @@ class NotificationService : IntentService("NotificationService") {
                 resources.getString(getText(notificationType))
         )
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val notificationsEnabled = preferences.getBoolean(KEY_REMINDER_ENABLED, true)
+        val notificationsEnabled = preferences
+                .getBoolean(KEY_REMINDER_ENABLED, DEFAULT_REMINDER_ENABLED)
         if (notificationsEnabled) {
             val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             manager.notify(1, notification)

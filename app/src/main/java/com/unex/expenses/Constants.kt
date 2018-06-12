@@ -24,5 +24,6 @@ const val KEY_REMINDER_ENABLED = "notification_reminder_enabled"
 const val KEY_REMINDER_TIME = "notification_reminder_time"
 
 // Defaults
-const val DEFAULT_LIMIT = "300"
-const val DEFAULT_TIME = "00:00"
+const val DEFAULT_DAILY_LIMIT = "300"
+const val DEFAULT_REMINDER_TIME = "00:00"
+const val DEFAULT_REMINDER_ENABLED = false
