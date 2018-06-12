@@ -17,14 +17,10 @@
         android:textStyle="bold"
         tools:text="Label text" />
 
-    <TextView
-        android:id="@+id/statValue"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/statsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
-        android:padding="8dp"
-        android:textSize="32sp"
-        android:textStyle="bold"
-        tools:text="$ 345" />
+        android:background="@color/background" />
+
 </LinearLayout>

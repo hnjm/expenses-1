@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="@string/preference_category_daily_limit">
+    <PreferenceCategory android:title="@string/preference_category_limits">
         <ListPreference
             android:defaultValue="300"
             android:entries="@array/preference_limit_options"
@@ -8,6 +8,14 @@
             android:key="daily_limit"
             android:summary="@string/preference_summary_daily_limit_amount"
             android:title="@string/preference_title_daily_limit_amount" />
+
+        <ListPreference
+            android:defaultValue="1000"
+            android:entries="@array/preference_monthly_limit_options"
+            android:entryValues="@array/preference_monthly_limit_values"
+            android:key="monthly_limit"
+            android:summary="@string/preference_summary_monthly_limit_amount"
+            android:title="@string/preference_title_monthly_limit_amount" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/preference_category_notifications">

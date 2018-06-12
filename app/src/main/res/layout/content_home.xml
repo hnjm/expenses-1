@@ -1,31 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp">
 
-    <FrameLayout
-        android:id="@+id/spent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/available"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
-
-    <FrameLayout
-        android:id="@+id/available"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/limit"
-        app:layout_constraintTop_toBottomOf="@id/spent" />
-
-    <FrameLayout
-        android:id="@+id/limit"
+    <fragment
+        android:id="@+id/spentFragment"
+        android:name="com.unex.expenses.ui.fragments.SpentFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/spendingListButton"
-        app:layout_constraintTop_toBottomOf="@id/available" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        tools:layout="@layout/fragment_spent" />
 
     <Button
         android:id="@+id/spendingListButton"
@@ -37,5 +26,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/limit" />
+        app:layout_constraintTop_toBottomOf="@id/spentFragment" />
 </android.support.constraint.ConstraintLayout>

@@ -3,22 +3,8 @@
     <color name="primary">#166A8F</color>
     <color name="dark">#0A5E83</color>
     <color name="accent">#F48924</color>
-    <color name="transparent">#00000000</color>
-
     <color name="background">#EEEEEE</color>
-    <color name="text">#000000</color>
-    <color name="white">#FFFFFF</color>
 
-    <color name="tag_red">#ed1c24</color>
-    <color name="tag_blue">#3369e7</color>
-    <color name="tag_yellow">#ffc20e</color>
-    <color name="tag_green">#11862f</color>
-    <color name="tag_orange">#ff7800</color>
-    <color name="tag_violet">#8e43e7</color>
-    <color name="tag_grey">#a7a9ac</color>
-    <color name="tag_brown">#a25016</color>
-    <color name="tag_light_blue">#0dd3ff</color>
-    <color name="tag_light_green">#8ee000</color>
-    <color name="tag_black">#333333</color>
-    <color name="tag_pink">#f7c8c9</color>
+    <color name="white">#FFFFFF</color>
+    <color name="divider">#CCCCCC</color>
 </resources>
