@@ -84,15 +84,13 @@
 
     <string-array name="preference_monthly_limit_options">
         <item>No limit</item>
-        <item>1.000</item>
-        <item>5.000</item>
+        <item>8.000</item>
+        <item>9.000</item>
         <item>10.000</item>
-        <item>20.000</item>
-        <item>30.000</item>
-        <item>40.000</item>
-        <item>50.000</item>
-        <item>60.000</item>
-        <item>70.000</item>
+        <item>11.000</item>
+        <item>12.000</item>
+        <item>13.000</item>
+        <item>14.000</item>
     </string-array>
 
     <string-array name="preference_limit_values">
@@ -108,15 +106,13 @@
 
     <string-array name="preference_monthly_limit_values">
         <item>0</item>
-        <item>1000</item>
-        <item>5000</item>
+        <item>8000</item>
+        <item>9000</item>
         <item>10000</item>
-        <item>20000</item>
-        <item>30000</item>
-        <item>40000</item>
-        <item>50000</item>
-        <item>60000</item>
-        <item>70000</item>
+        <item>11000</item>
+        <item>12000</item>
+        <item>13000</item>
+        <item>14000</item>
     </string-array>
 
     <string-array name="preference_reminder_times">
