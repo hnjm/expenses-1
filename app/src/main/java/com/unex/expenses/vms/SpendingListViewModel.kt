@@ -1,41 +1,46 @@
 package com.unex.expenses.vms
 
 import android.app.Application
-import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.*
 import android.os.AsyncTask
 import com.unex.expenses.SpendingList
+import com.unex.expenses.TagSet
+import com.unex.expenses.models.SpendingsQuery
 import com.unex.expenses.persistence.Database
 
 class SpendingListViewModel(app: Application) : AndroidViewModel(app) {
 
-    private var storedSpendings: SpendingList = emptyList()
-    private var selectedTags: Set<String> = emptySet()
-
-    val spendingsObs: MediatorLiveData<SpendingList> = MediatorLiveData()
-
-    private fun getFilteredSpendings() = storedSpendings.filter {
-        selectedTags.isEmpty() || it.tags.intersect(selectedTags).isNotEmpty()
-    }
+    private val tagsObs: MutableLiveData<TagSet> = MutableLiveData()
+    private val spendingsQueryObs: MediatorLiveData<SpendingsQuery> = MediatorLiveData()
 
     init {
-        spendingsObs.addSource(Database.get().spendingDao().retrieve(), {
-            it?.let {
-                storedSpendings = it
-                val spendings = getFilteredSpendings()
-                spendingsObs.postValue(spendings)
+        spendingsQueryObs.value = SpendingsQuery(listOf(), setOf())
+        spendingsQueryObs.addSource(Database.get().spendingDao().retrieve(), { spendings ->
+            spendings?.let {
+                val tags = spendingsQueryObs.value!!.tags
+                spendingsQueryObs.postValue(SpendingsQuery(it, tags))
+            }
+        })
+        spendingsQueryObs.addSource(tagsObs, { tags ->
+            tags?.let {
+                val spendings = spendingsQueryObs.value!!.spendings
+                spendingsQueryObs.postValue(SpendingsQuery(spendings, it))
             }
         })
     }
 
-    fun setSelectedTags(tags: Set<String>) {
-        selectedTags = tags
-        val spendings = getFilteredSpendings()
-        spendingsObs.postValue(spendings)
+    fun getSpendings(): LiveData<SpendingList> = Transformations.map(spendingsQueryObs, { query ->
+        query.spendings.filter {
+            query.tags.isEmpty() || it.tags.intersect(query.tags).isNotEmpty()
+        }
+    })
+
+    fun setSelectedTags(tags: TagSet) {
+        tagsObs.postValue(tags)
     }
 
     fun deleteSpending(spendingId: Long) {
-        val spending = storedSpendings.find { spendingId == it.id }
+        val spending = spendingsQueryObs.value?.spendings?.find { spendingId == it.id }
         spending?.let {
             AsyncTask.execute { Database.get().spendingDao().delete(it) }
         }

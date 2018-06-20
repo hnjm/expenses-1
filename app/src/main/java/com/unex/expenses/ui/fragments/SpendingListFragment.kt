@@ -62,8 +62,8 @@ class SpendingListFragment : Fragment() {
         super.onStart()
         activity?.setTitle(R.string.title_spending_list)
         EventBus.getDefault().register(this)
-        model.spendingsObs.observe(this, Observer<SpendingList> { storedSpendings ->
-            storedSpendings?.let {
+        model.getSpendings().observe(this, Observer<SpendingList> { spendings ->
+            spendings?.let {
                 empty.visibility = if (it.isNotEmpty()) View.GONE else View.VISIBLE
                 spendingListAdapter.submitList(it)
             }
