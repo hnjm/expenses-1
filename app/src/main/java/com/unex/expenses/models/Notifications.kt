@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.preference.PreferenceManager
-import com.unex.expenses.ALARM_RECEIVER_CODE
 import com.unex.expenses.DEFAULT_REMINDER_TIME
 import com.unex.expenses.KEY_REMINDER_TIME
 import com.unex.expenses.receivers.AlarmReceiver
@@ -15,7 +14,7 @@ object Notifications {
 
     fun scheduleAlarm(context: Context) {
         val (manager, pendingIntent) = getAlarmContext(context)
-        manager.setInexactRepeating(
+        manager.setRepeating(
                 AlarmManager.RTC,
                 getAlarmTime(context),
                 AlarmManager.INTERVAL_DAY,
@@ -30,12 +29,7 @@ object Notifications {
 
     private fun getAlarmContext(context: Context): Pair<AlarmManager, PendingIntent> {
         val intent = Intent(context, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(
-                context,
-                ALARM_RECEIVER_CODE,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
-        )
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
         val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         return Pair(manager, pendingIntent)
     }

@@ -47,7 +47,7 @@
     <string name="preference_title_reminder_notification_time">Reminder time</string>
 
     <string name="notification_reminder_title">Time to register today spendings!</string>
-    <string name="notification_reminder_text">Enter and register today spendings to keep up to date</string>
+    <string name="notification_reminder_text">Register today spendings to keep your spendings up to date</string>
 
     <string name="label_spending_details">Spending Details</string>
     <string name="label_tag_color">Tag Color</string>

@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceFragment
 import android.preference.PreferenceManager
+import com.unex.expenses.DEFAULT_REMINDER_ENABLED
 import com.unex.expenses.KEY_REMINDER_ENABLED
 import com.unex.expenses.KEY_REMINDER_TIME
 import com.unex.expenses.R
@@ -22,8 +23,7 @@ class SettingsFragment : PreferenceFragment(), SharedPreferences.OnSharedPrefere
     override fun onSharedPreferenceChanged(preferences: SharedPreferences, key: String) {
         when (key) {
             KEY_REMINDER_ENABLED -> {
-                val enabled = preferences.getBoolean(KEY_REMINDER_ENABLED, false)
-                if (enabled) {
+                if (preferences.getBoolean(KEY_REMINDER_ENABLED, DEFAULT_REMINDER_ENABLED)) {
                     Notifications.scheduleAlarm(activity)
                 } else {
                     Notifications.cancelAlarm(activity)

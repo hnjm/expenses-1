@@ -1,8 +1,5 @@
 package com.unex.expenses
 
-// Miscellan
-const val ALARM_RECEIVER_CODE = 1000
-
 // Alarm receiver
 const val DB_NAME = "spendings"
 
